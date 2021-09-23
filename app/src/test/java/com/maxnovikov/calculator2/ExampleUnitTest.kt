@@ -34,4 +34,12 @@ class ExampleUnitTest {
     assertEquals(2, a)
   }
 
+  @Test
+  fun feature2_isCorrect() {
+    var a = 1
+    a++
+    println("Feature 2")
+    assertEquals(2, a)
+  }
+
 }
