@@ -21,6 +21,13 @@ class ExampleUnitTest {
   }
 
   @Test
+  fun decrement_isCorrect() {
+    var a = 2
+    a--
+    assertEquals(1, a)
+  }
+
+  @Test
   fun increment_isCorrect() {
     var a = 1
     a++
