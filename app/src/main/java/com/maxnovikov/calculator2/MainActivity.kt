@@ -1,12 +1,16 @@
 package com.maxnovikov.calculator2
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import com.maxnovikov.calculator2.SettingsActivity.Companion.SETTINGS_RESULT_REQUEST_CODE
+import androidx.activity.result.ActivityResultLauncher
 
 class MainActivity : BaseActivity() {
+
+  private val getResult: ActivityResultLauncher<Int> =
+    registerForActivityResult(Result()) { result ->
+      Toast.makeText(this, "result $result", Toast.LENGTH_SHORT).show()
+    }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -20,17 +24,7 @@ class MainActivity : BaseActivity() {
   }
 
   private fun openSettings() {
-    Toast.makeText(this, "Открытие настроек", Toast.LENGTH_LONG).show()
-    val intent = Intent(this, SettingsActivity::class.java)
-    intent.putExtra(SettingsActivity.SETTINGS_RESULT_KEY, 10)
-    startActivityForResult(intent, SETTINGS_RESULT_REQUEST_CODE)
-  }
-
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    data?.getStringExtra(SettingsActivity.SETTINGS_RESULT_KEY)?.let {
-      Toast.makeText(this, "result $it", Toast.LENGTH_SHORT).show()
-    }
+    getResult.launch(10)
   }
 }
 
