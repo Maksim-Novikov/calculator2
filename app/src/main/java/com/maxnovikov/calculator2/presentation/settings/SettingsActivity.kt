@@ -1,9 +1,11 @@
-package com.maxnovikov.calculator2
+package com.maxnovikov.calculator2.presentation.settings
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
+import com.maxnovikov.calculator2.R
+import com.maxnovikov.calculator2.presentation.common.BaseActivity
 
 class SettingsActivity : BaseActivity() {
 

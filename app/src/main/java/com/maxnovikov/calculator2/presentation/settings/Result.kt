@@ -1,4 +1,4 @@
-package com.maxnovikov.calculator2
+package com.maxnovikov.calculator2.presentation.settings
 
 import android.content.Context
 import android.content.Intent

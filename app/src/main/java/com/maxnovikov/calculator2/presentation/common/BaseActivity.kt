@@ -1,4 +1,4 @@
-package com.maxnovikov.calculator2
+package com.maxnovikov.calculator2.presentation.common
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    Log.d(tag, "onCreate")
+    Log.d(tag, "onCreate $savedInstanceState")
   }
 
   override fun onStart() {
