@@ -8,6 +8,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.maxnovikov.calculator2.R.layout
 import com.maxnovikov.calculator2.databinding.MainActivityBinding
 import com.maxnovikov.calculator2.presentation.common.BaseActivity
+import com.maxnovikov.calculator2.presentation.main.Operator.DIVIDE
+import com.maxnovikov.calculator2.presentation.main.Operator.MINUS
+import com.maxnovikov.calculator2.presentation.main.Operator.MULTIPLICATION
+import com.maxnovikov.calculator2.presentation.main.Operator.PLUS
 import com.maxnovikov.calculator2.presentation.settings.Result
 
 class MainActivity : BaseActivity() {
@@ -31,10 +35,6 @@ class MainActivity : BaseActivity() {
       openSettings()
     }
 
-    viewBinding.mainEquals.setOnClickListener {
-
-    }
-
     listOf(
       viewBinding.mainZero,
       viewBinding.mainOne,
@@ -47,16 +47,46 @@ class MainActivity : BaseActivity() {
       viewBinding.mainEight,
       viewBinding.mainNine,
     ).forEachIndexed { index, textView ->
-      textView.setOnClickListener { viewModel.onNumberClick(index) }
+      textView.setOnClickListener {
+        viewModel.onNumberClicked(index, viewBinding.mainInput.selectionStart)
+      }
     }
 
-
-
     viewModel.expressionState.observe(this) { state ->
-      viewBinding.mainInput.setText(state)
+      viewBinding.mainInput.setText(state.expression)
+      viewBinding.mainInput.setSelection(state.selection)
     }
     viewModel.resultState.observe(this) { state ->
       viewBinding.mainResult.text = state
+    }
+
+    viewBinding.mainBack.setOnClickListener {
+      viewModel.onBackSpaceClicked(viewBinding.mainInput.selectionStart)
+    }
+
+    viewBinding.mainClear.setOnClickListener {
+      viewModel.onClearClicked()
+    }
+
+    viewBinding.mainPoint.setOnClickListener {
+      viewModel.onDotClicked(viewBinding.mainInput.selectionStart)
+    }
+
+    viewBinding.mainMinus.setOnClickListener {
+      viewModel.onOperatorClicked(MINUS, viewBinding.mainInput.selectionStart)
+    }
+    viewBinding.mainPlus.setOnClickListener {
+      viewModel.onOperatorClicked(PLUS, viewBinding.mainInput.selectionStart)
+    }
+    viewBinding.mainDivider.setOnClickListener {
+      viewModel.onOperatorClicked(DIVIDE, viewBinding.mainInput.selectionStart)
+    }
+    viewBinding.mainMultiple.setOnClickListener {
+      viewModel.onOperatorClicked(MULTIPLICATION, viewBinding.mainInput.selectionStart)
+    }
+
+    viewBinding.mainEquals.setOnClickListener {
+      viewModel.onEqualsClicked()
     }
   }
 
